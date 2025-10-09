@@ -92,7 +92,7 @@ def name_diversity(data: list) -> dict:
     return unique_names
 
 
-def name_length(data: list[dict[str,str]]) -> dict[str, dict[str, float]]:
+def name_length(data: list[dict[str,str]]) -> dict[str, dict[str, str]]:
 
     """
     Returns the average of the names length for each year.
@@ -137,14 +137,14 @@ def name_length(data: list[dict[str,str]]) -> dict[str, dict[str, float]]:
 
         for gen in ["m", "f"]:  
             if gen in genders:
-                averages[year][gen] = sum(len(name) for name in genders[gen]) / len(genders[gen])
+                averages[year][gen] = f"{sum(len(name) for name in genders[gen]) / len(genders[gen]):.2f}"
             else:    
-                averages[year][gen] = 0.0
+                averages[year][gen] = "0.0"
 
     return averages
 
 
-def name_endings_analisys(data: list):
+def name_endings_analisys(data: list) -> list:
 
     """
     Returns the 5 most popular name, grouping them in their base form (without the last charatcher).
