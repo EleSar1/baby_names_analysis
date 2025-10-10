@@ -1,30 +1,41 @@
 import pytest
 
-from src.analysis import name_length
+from ..src.analysis import name_length
 
 
-def test_name_length_ok():
-
-    mock_data = [
-        {"Name": "Elena", "Year": "2020", "Gender": "f"},
-        {"Name": "Marcus", "Year": "2020", "Gender": "m"}
-        ]
-
-    result = {
-        "2020": {"f": 5, "m": 6}
-    }
-
-    assert result == name_length(mock_data)
-
-
-def test_name_length_without_a_gender_field():
-
-    mock_data = [
-        {"Name": "Elena", "Year": "2020", "Gender": "f"}
+def test_name_length_basic():
+    
+    data = [
+        {"Year": "2020", "Gender": "m", "Name": "Luca"},   
+        {"Year": "2020", "Gender": "m", "Name": "Marco"},  
+        {"Year": "2020", "Gender": "f", "Name": "Anna"},  
+        {"Year": "2021", "Gender": "f", "Name": "Giulia"}, 
     ]
 
-    result = {
-        "2020": {"f": 5, "m": 0}
+    result = name_length(data)
+
+    expected = {
+        "2020": {"m": "4.50", "f": "4.00"},
+        "2021": {"m": "0.0", "f": "6.00"}
     }
 
-    assert result == name_length(mock_data)
+    assert result == expected
+
+
+def test_name_length_empty_list():
+    
+    result = name_length([])
+    assert result == {}
+
+
+def test_name_length_missing_key():
+
+    data = [{"Year": "2020", "Gender": "M"}]  # missing "Name"
+    with pytest.raises(KeyError):
+        name_length(data)
+
+
+def test_name_length_invalid_input_type():
+
+    with pytest.raises(TypeError):
+        name_length("not a list")

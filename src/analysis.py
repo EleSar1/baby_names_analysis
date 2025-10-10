@@ -131,7 +131,7 @@ def name_length(data: list[dict[str,str]]) -> dict[str, dict[str, str]]:
 
         data_for_year[year][gender].append(name)
 
-    averages: dict[str, dict[str, float]] = {}
+    averages: dict[str, dict[str, str]] = {}
     for year, genders in data_for_year.items():
         averages[year] = {}
 
@@ -144,7 +144,7 @@ def name_length(data: list[dict[str,str]]) -> dict[str, dict[str, str]]:
     return averages
 
 
-def name_endings_analisys(data: list) -> list:
+def name_endings_analysis(data: list) -> list:
 
     """
     Returns the 5 most popular name, grouping them in their base form (without the last charatcher).
@@ -175,7 +175,7 @@ def name_endings_analisys(data: list) -> list:
         except KeyError as e:
             raise KeyError(f"Missing required key in row: {e}")
         except ValueError:
-            raise ValueError(f"{count_names} could not be cast as int.")
+            raise ValueError(f"{row.get("Count")} could not be cast as int.")
         
         most_popular_names[no_gender_name] = most_popular_names.get(no_gender_name, 0) + count_names
 
@@ -215,7 +215,7 @@ def name_popularity_over_decades(data: list[dict[str, str]]) -> dict[str, dict[s
             name = row["Name"]
             count = int(row["Count"])
         except ValueError:
-            raise ValueError(f"{count} could not be cast as int")
+            raise ValueError(f"{row.get("Count")} could not be cast as int")
         except KeyError as e:
             raise KeyError(f"Missing required key in row: {e}")
         

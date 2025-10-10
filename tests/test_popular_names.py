@@ -1,6 +1,6 @@
 import pytest
 
-from src.analysis import popular_names
+from ..src.analysis import popular_names
 
 def test_basic_case():
     

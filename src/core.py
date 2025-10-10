@@ -1,5 +1,5 @@
 from .file_manager import read_file
-from .analysis import popular_names, name_diversity, name_length, name_endings_analisys, name_popularity_over_decades
+from .analysis import popular_names, name_diversity, name_length, name_endings_analysis, name_popularity_over_decades
 from .visualization import visualize_popular_names, visualize_name_diversity, visualize_name_length, visualize_top_5_base_form_names, visualize_top_names_per_decade
 
 def main():
@@ -19,7 +19,7 @@ def main():
     visualize_name_length(avg_name_length)
 
     print("\nTop 5 base form names (without the last letter):\n")
-    name_endings = name_endings_analisys(data)
+    name_endings = name_endings_analysis(data)
     visualize_top_5_base_form_names(name_endings)
 
     print("\nTop 5 male and female names over decades:\n")

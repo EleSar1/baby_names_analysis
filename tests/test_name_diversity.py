@@ -1,6 +1,6 @@
 import pytest
 
-from src.analysis import name_diversity
+from ..src.analysis import name_diversity
 
 
 def test_name_diversity_basic_case():
